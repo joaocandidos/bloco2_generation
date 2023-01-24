@@ -61,3 +61,72 @@ on tb_categorias.id = tb_produtos.categoria_id;
 select nome,preco,marca,categoria_id from tb_produtos
 inner join tb_categorias
 on tb_categorias.id = tb_produtos.categoria_id where categoria_id = 2 ;
+
+
+/*******************************************************************************************************/
+-- criar banco de dados db_pizzaria_legal
+create database db_pizzaria_legal;
+use db_pizzaria_legal;
+-- criando a tabela tb_categoria
+create table tb_categoria(
+id bigint auto_increment,
+categoria varchar(30)not null,
+primary key(id)
+);
+-- criando tb_pizzas
+create table tb_pizzas(
+id bigint auto_increment,
+nome varchar(30) not null,
+receio varchar(30)not null,
+preco decimal(4,2)not null,
+categoria_id bigint not null,
+primary key(id),
+foreign key(categoria_id) references tb_categoria(id)
+); 
+
+-- inserindo 5 registros na tb_categoria
+insert into tb_categoria(categoria)value
+("queijo"),
+("calabreza"),
+("legumes"),
+("berinjela"),
+("salame");
+
+-- inserindo 8 registros na tb_pizzas
+insert into tb_pizzas(nome,receio,preco,categoria_id)value
+("muzarela","queijo",50.00,1),
+("muzarela2","queijo",50.00,1),
+("calabreza","calabreza",45.00,2),
+("calabreza2","calabreza",45.00,2),
+("abobrinha","abobrinha",32.00,3),
+("pepino","pepino",38.00,3),
+("salame","salame",80.00,5),
+("salame2","salame",80.00,5);
+
+-- selecinando todas as pizzas com valor maior que 45.00
+select * from tb_pizzas where preco > 45.00;
+
+-- selecione todas as pizzas com valor maior que 50.00 e menor igual a 100.00
+select * from tb_pizzas where preco > 50.00 and preco <= 100.00;
+-- selecione todas as pizzas que tem m no nome
+select * from tb_pizzas where nome like "%m%";
+
+ select * from tb_pizzas inner join tb_categoria
+ on tb_categoria.id = tb_pizzas.categoria_id;
+ 
+ select * from tb_pizzas inner join tb_categoria
+ on tb_categoria.id = tb_pizzas.categoria_id where categoria_id = 1;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
